@@ -7,12 +7,14 @@ import Layout from './pages/layout/Layout'
 import {
   createBrowserRouter,
   RouterProvider,
-  Navigate
+  Navigate,
 } from 'react-router-dom'
+import { useContext } from 'react'
+import { AuthContext } from './context/auth-context'
 
 
 function App() {
-  const currentUser = true
+  const {currentUser} = useContext(AuthContext)
 
   const ProtectedRoute = ({children}) => {
     if(!currentUser){
