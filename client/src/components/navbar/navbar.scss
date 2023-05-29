@@ -14,6 +14,10 @@
     color:themed("textColor");
     z-index: 999;
 
+    .icon-button{
+      cursor: pointer;
+    }
+
     .left {
       display: flex;
       align-items: center;

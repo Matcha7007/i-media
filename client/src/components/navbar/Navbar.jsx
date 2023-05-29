@@ -22,23 +22,23 @@ const Navbar = () => {
         <Link to='/' style={{ textDecoration:'none' }}>
           <span>ilhamedia</span>
         </Link>
-        <HomeOutlinedIcon />
+        <HomeOutlinedIcon className='icon-button' />
         { 
           darkMode  ? 
                       (<DarkModeOutlinedIcon className='icon-button' onClick={toggle} />) 
                     : 
                       (<WbSunnyOutlinedIcon className='icon-button' onClick={toggle} />)
         }
-        <GridViewOutlinedIcon />
+        <GridViewOutlinedIcon className='icon-button' />
         <div className="search">
-          <SearchOutlinedIcon />
+          <SearchOutlinedIcon className='icon-button' />
           <input type="text" placeholder='Search..' />
         </div>
       </div>
       <div className="right">
-        <PersonOutlineOutlinedIcon />
-        <EmailOutlinedIcon />
-        <NotificationsOutlinedIcon />
+        <PersonOutlineOutlinedIcon className='icon-button' />
+        <EmailOutlinedIcon className='icon-button' />
+        <NotificationsOutlinedIcon className='icon-button' />
         <div className="user">
           <img src={currentUser.pict} alt="" />
           <span>{currentUser.name}</span>
