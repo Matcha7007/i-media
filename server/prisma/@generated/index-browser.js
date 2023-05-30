@@ -97,6 +97,18 @@ exports.Prisma.AppsScalarFieldEnum = {
   modified_by: 'modified_by'
 };
 
+exports.Prisma.PostsScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  user_id: 'user_id',
+  image: 'image',
+  desc: 'desc',
+  created_on: 'created_on',
+  modified_on: 'modified_on',
+  created_by: 'created_by',
+  modified_by: 'modified_by'
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -158,7 +170,8 @@ exports.Prisma.ModelName = {
   user: 'user',
   user_detail: 'user_detail',
   user_app: 'user_app',
-  apps: 'apps'
+  apps: 'apps',
+  posts: 'posts'
 };
 
 /**

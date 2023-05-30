@@ -78,6 +78,22 @@ export type apps = {
   modified_by: number | null
 }
 
+/**
+ * Model posts
+ * 
+ */
+export type posts = {
+  id: number
+  uuid: string
+  user_id: number
+  image: string | null
+  desc: string | null
+  created_on: Date | null
+  modified_on: Date | null
+  created_by: number | null
+  modified_by: number | null
+}
+
 
 /**
  * ##  Prisma Client ʲˢ
@@ -235,6 +251,16 @@ export class PrismaClient<
     * ```
     */
   get apps(): Prisma.appsDelegate<GlobalReject>;
+
+  /**
+   * `prisma.posts`: Exposes CRUD operations for the **posts** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Posts
+    * const posts = await prisma.posts.findMany()
+    * ```
+    */
+  get posts(): Prisma.postsDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -707,7 +733,8 @@ export namespace Prisma {
     user: 'user',
     user_detail: 'user_detail',
     user_app: 'user_app',
-    apps: 'apps'
+    apps: 'apps',
+    posts: 'posts'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -876,11 +903,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     user_app: number
     user_detail: number
+    posts: number
   }
 
   export type UserCountOutputTypeSelect = {
     user_app?: boolean
     user_detail?: boolean
+    posts?: boolean
   }
 
   export type UserCountOutputTypeGetPayload<S extends boolean | null | undefined | UserCountOutputTypeArgs> =
@@ -1202,6 +1231,7 @@ export namespace Prisma {
     modified_by?: boolean
     user_app?: boolean | user$user_appArgs
     user_detail?: boolean | user$user_detailArgs
+    posts?: boolean | user$postsArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -1209,6 +1239,7 @@ export namespace Prisma {
   export type userInclude = {
     user_app?: boolean | user$user_appArgs
     user_detail?: boolean | user$user_detailArgs
+    posts?: boolean | user$postsArgs
     _count?: boolean | UserCountOutputTypeArgs
   }
 
@@ -1221,6 +1252,7 @@ export namespace Prisma {
     [P in TruthyKeys<S['include']>]:
         P extends 'user_app' ? Array < user_appGetPayload<S['include'][P]>>  :
         P extends 'user_detail' ? Array < user_detailGetPayload<S['include'][P]>>  :
+        P extends 'posts' ? Array < postsGetPayload<S['include'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['include'][P]> :  never
   } 
     : S extends { select: any } & (userArgs | userFindManyArgs)
@@ -1228,6 +1260,7 @@ export namespace Prisma {
     [P in TruthyKeys<S['select']>]:
         P extends 'user_app' ? Array < user_appGetPayload<S['select'][P]>>  :
         P extends 'user_detail' ? Array < user_detailGetPayload<S['select'][P]>>  :
+        P extends 'posts' ? Array < postsGetPayload<S['select'][P]>>  :
         P extends '_count' ? UserCountOutputTypeGetPayload<S['select'][P]> :  P extends keyof user ? user[P] : never
   } 
       : user
@@ -1603,6 +1636,8 @@ export namespace Prisma {
     user_app<T extends user$user_appArgs= {}>(args?: Subset<T, user$user_appArgs>): Prisma.PrismaPromise<Array<user_appGetPayload<T>>| Null>;
 
     user_detail<T extends user$user_detailArgs= {}>(args?: Subset<T, user$user_detailArgs>): Prisma.PrismaPromise<Array<user_detailGetPayload<T>>| Null>;
+
+    posts<T extends user$postsArgs= {}>(args?: Subset<T, user$postsArgs>): Prisma.PrismaPromise<Array<postsGetPayload<T>>| Null>;
 
     private get _document();
     /**
@@ -1998,6 +2033,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Enumerable<User_detailScalarFieldEnum>
+  }
+
+
+  /**
+   * user.posts
+   */
+  export type user$postsArgs = {
+    /**
+     * Select specific fields to fetch from the posts
+     */
+    select?: postsSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: postsInclude | null
+    where?: postsWhereInput
+    orderBy?: Enumerable<postsOrderByWithRelationInput>
+    cursor?: postsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Enumerable<PostsScalarFieldEnum>
   }
 
 
@@ -5092,6 +5148,1015 @@ export namespace Prisma {
 
 
   /**
+   * Model posts
+   */
+
+
+  export type AggregatePosts = {
+    _count: PostsCountAggregateOutputType | null
+    _avg: PostsAvgAggregateOutputType | null
+    _sum: PostsSumAggregateOutputType | null
+    _min: PostsMinAggregateOutputType | null
+    _max: PostsMaxAggregateOutputType | null
+  }
+
+  export type PostsAvgAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    created_by: number | null
+    modified_by: number | null
+  }
+
+  export type PostsSumAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    created_by: number | null
+    modified_by: number | null
+  }
+
+  export type PostsMinAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_id: number | null
+    image: string | null
+    desc: string | null
+    created_on: Date | null
+    modified_on: Date | null
+    created_by: number | null
+    modified_by: number | null
+  }
+
+  export type PostsMaxAggregateOutputType = {
+    id: number | null
+    uuid: string | null
+    user_id: number | null
+    image: string | null
+    desc: string | null
+    created_on: Date | null
+    modified_on: Date | null
+    created_by: number | null
+    modified_by: number | null
+  }
+
+  export type PostsCountAggregateOutputType = {
+    id: number
+    uuid: number
+    user_id: number
+    image: number
+    desc: number
+    created_on: number
+    modified_on: number
+    created_by: number
+    modified_by: number
+    _all: number
+  }
+
+
+  export type PostsAvgAggregateInputType = {
+    id?: true
+    user_id?: true
+    created_by?: true
+    modified_by?: true
+  }
+
+  export type PostsSumAggregateInputType = {
+    id?: true
+    user_id?: true
+    created_by?: true
+    modified_by?: true
+  }
+
+  export type PostsMinAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_id?: true
+    image?: true
+    desc?: true
+    created_on?: true
+    modified_on?: true
+    created_by?: true
+    modified_by?: true
+  }
+
+  export type PostsMaxAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_id?: true
+    image?: true
+    desc?: true
+    created_on?: true
+    modified_on?: true
+    created_by?: true
+    modified_by?: true
+  }
+
+  export type PostsCountAggregateInputType = {
+    id?: true
+    uuid?: true
+    user_id?: true
+    image?: true
+    desc?: true
+    created_on?: true
+    modified_on?: true
+    created_by?: true
+    modified_by?: true
+    _all?: true
+  }
+
+  export type PostsAggregateArgs = {
+    /**
+     * Filter which posts to aggregate.
+     */
+    where?: postsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of posts to fetch.
+     */
+    orderBy?: Enumerable<postsOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: postsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` posts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` posts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned posts
+    **/
+    _count?: true | PostsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PostsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PostsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PostsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PostsMaxAggregateInputType
+  }
+
+  export type GetPostsAggregateType<T extends PostsAggregateArgs> = {
+        [P in keyof T & keyof AggregatePosts]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePosts[P]>
+      : GetScalarType<T[P], AggregatePosts[P]>
+  }
+
+
+
+
+  export type PostsGroupByArgs = {
+    where?: postsWhereInput
+    orderBy?: Enumerable<postsOrderByWithAggregationInput>
+    by: PostsScalarFieldEnum[]
+    having?: postsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PostsCountAggregateInputType | true
+    _avg?: PostsAvgAggregateInputType
+    _sum?: PostsSumAggregateInputType
+    _min?: PostsMinAggregateInputType
+    _max?: PostsMaxAggregateInputType
+  }
+
+
+  export type PostsGroupByOutputType = {
+    id: number
+    uuid: string
+    user_id: number
+    image: string | null
+    desc: string | null
+    created_on: Date | null
+    modified_on: Date | null
+    created_by: number | null
+    modified_by: number | null
+    _count: PostsCountAggregateOutputType | null
+    _avg: PostsAvgAggregateOutputType | null
+    _sum: PostsSumAggregateOutputType | null
+    _min: PostsMinAggregateOutputType | null
+    _max: PostsMaxAggregateOutputType | null
+  }
+
+  type GetPostsGroupByPayload<T extends PostsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickArray<PostsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PostsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PostsGroupByOutputType[P]>
+            : GetScalarType<T[P], PostsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type postsSelect = {
+    id?: boolean
+    uuid?: boolean
+    user_id?: boolean
+    image?: boolean
+    desc?: boolean
+    created_on?: boolean
+    modified_on?: boolean
+    created_by?: boolean
+    modified_by?: boolean
+    user?: boolean | userArgs
+  }
+
+
+  export type postsInclude = {
+    user?: boolean | userArgs
+  }
+
+  export type postsGetPayload<S extends boolean | null | undefined | postsArgs> =
+    S extends { select: any, include: any } ? 'Please either choose `select` or `include`' :
+    S extends true ? posts :
+    S extends undefined ? never :
+    S extends { include: any } & (postsArgs | postsFindManyArgs)
+    ? posts  & {
+    [P in TruthyKeys<S['include']>]:
+        P extends 'user' ? userGetPayload<S['include'][P]> :  never
+  } 
+    : S extends { select: any } & (postsArgs | postsFindManyArgs)
+      ? {
+    [P in TruthyKeys<S['select']>]:
+        P extends 'user' ? userGetPayload<S['select'][P]> :  P extends keyof posts ? posts[P] : never
+  } 
+      : posts
+
+
+  type postsCountArgs = 
+    Omit<postsFindManyArgs, 'select' | 'include'> & {
+      select?: PostsCountAggregateInputType | true
+    }
+
+  export interface postsDelegate<GlobalRejectSettings extends Prisma.RejectOnNotFound | Prisma.RejectPerOperation | false | undefined> {
+
+    /**
+     * Find zero or one Posts that matches the filter.
+     * @param {postsFindUniqueArgs} args - Arguments to find a Posts
+     * @example
+     * // Get one Posts
+     * const posts = await prisma.posts.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends postsFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args: SelectSubset<T, postsFindUniqueArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'posts'> extends True ? Prisma__postsClient<postsGetPayload<T>> : Prisma__postsClient<postsGetPayload<T> | null, null>
+
+    /**
+     * Find one Posts that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {postsFindUniqueOrThrowArgs} args - Arguments to find a Posts
+     * @example
+     * // Get one Posts
+     * const posts = await prisma.posts.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends postsFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, postsFindUniqueOrThrowArgs>
+    ): Prisma__postsClient<postsGetPayload<T>>
+
+    /**
+     * Find the first Posts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {postsFindFirstArgs} args - Arguments to find a Posts
+     * @example
+     * // Get one Posts
+     * const posts = await prisma.posts.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends postsFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+      args?: SelectSubset<T, postsFindFirstArgs>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'posts'> extends True ? Prisma__postsClient<postsGetPayload<T>> : Prisma__postsClient<postsGetPayload<T> | null, null>
+
+    /**
+     * Find the first Posts that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {postsFindFirstOrThrowArgs} args - Arguments to find a Posts
+     * @example
+     * // Get one Posts
+     * const posts = await prisma.posts.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends postsFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, postsFindFirstOrThrowArgs>
+    ): Prisma__postsClient<postsGetPayload<T>>
+
+    /**
+     * Find zero or more Posts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {postsFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Posts
+     * const posts = await prisma.posts.findMany()
+     * 
+     * // Get first 10 Posts
+     * const posts = await prisma.posts.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const postsWithIdOnly = await prisma.posts.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends postsFindManyArgs>(
+      args?: SelectSubset<T, postsFindManyArgs>
+    ): Prisma.PrismaPromise<Array<postsGetPayload<T>>>
+
+    /**
+     * Create a Posts.
+     * @param {postsCreateArgs} args - Arguments to create a Posts.
+     * @example
+     * // Create one Posts
+     * const Posts = await prisma.posts.create({
+     *   data: {
+     *     // ... data to create a Posts
+     *   }
+     * })
+     * 
+    **/
+    create<T extends postsCreateArgs>(
+      args: SelectSubset<T, postsCreateArgs>
+    ): Prisma__postsClient<postsGetPayload<T>>
+
+    /**
+     * Create many Posts.
+     *     @param {postsCreateManyArgs} args - Arguments to create many Posts.
+     *     @example
+     *     // Create many Posts
+     *     const posts = await prisma.posts.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends postsCreateManyArgs>(
+      args?: SelectSubset<T, postsCreateManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Posts.
+     * @param {postsDeleteArgs} args - Arguments to delete one Posts.
+     * @example
+     * // Delete one Posts
+     * const Posts = await prisma.posts.delete({
+     *   where: {
+     *     // ... filter to delete one Posts
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends postsDeleteArgs>(
+      args: SelectSubset<T, postsDeleteArgs>
+    ): Prisma__postsClient<postsGetPayload<T>>
+
+    /**
+     * Update one Posts.
+     * @param {postsUpdateArgs} args - Arguments to update one Posts.
+     * @example
+     * // Update one Posts
+     * const posts = await prisma.posts.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends postsUpdateArgs>(
+      args: SelectSubset<T, postsUpdateArgs>
+    ): Prisma__postsClient<postsGetPayload<T>>
+
+    /**
+     * Delete zero or more Posts.
+     * @param {postsDeleteManyArgs} args - Arguments to filter Posts to delete.
+     * @example
+     * // Delete a few Posts
+     * const { count } = await prisma.posts.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends postsDeleteManyArgs>(
+      args?: SelectSubset<T, postsDeleteManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Posts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {postsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Posts
+     * const posts = await prisma.posts.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends postsUpdateManyArgs>(
+      args: SelectSubset<T, postsUpdateManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Posts.
+     * @param {postsUpsertArgs} args - Arguments to update or create a Posts.
+     * @example
+     * // Update or create a Posts
+     * const posts = await prisma.posts.upsert({
+     *   create: {
+     *     // ... data to create a Posts
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Posts we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends postsUpsertArgs>(
+      args: SelectSubset<T, postsUpsertArgs>
+    ): Prisma__postsClient<postsGetPayload<T>>
+
+    /**
+     * Count the number of Posts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {postsCountArgs} args - Arguments to filter Posts to count.
+     * @example
+     * // Count the number of Posts
+     * const count = await prisma.posts.count({
+     *   where: {
+     *     // ... the filter for the Posts we want to count
+     *   }
+     * })
+    **/
+    count<T extends postsCountArgs>(
+      args?: Subset<T, postsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends _Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PostsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Posts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PostsAggregateArgs>(args: Subset<T, PostsAggregateArgs>): Prisma.PrismaPromise<GetPostsAggregateType<T>>
+
+    /**
+     * Group by Posts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PostsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PostsGroupByArgs['orderBy'] }
+        : { orderBy?: PostsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends TupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PostsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for posts.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__postsClient<T, Null = never> implements Prisma.PrismaPromise<T> {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+    constructor(_dmmf: runtime.DMMFClass, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+
+    user<T extends userArgs= {}>(args?: Subset<T, userArgs>): Prisma__userClient<userGetPayload<T> | Null>;
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+
+
+  // Custom InputTypes
+
+  /**
+   * posts base type for findUnique actions
+   */
+  export type postsFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the posts
+     */
+    select?: postsSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: postsInclude | null
+    /**
+     * Filter, which posts to fetch.
+     */
+    where: postsWhereUniqueInput
+  }
+
+  /**
+   * posts findUnique
+   */
+  export interface postsFindUniqueArgs extends postsFindUniqueArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * posts findUniqueOrThrow
+   */
+  export type postsFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the posts
+     */
+    select?: postsSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: postsInclude | null
+    /**
+     * Filter, which posts to fetch.
+     */
+    where: postsWhereUniqueInput
+  }
+
+
+  /**
+   * posts base type for findFirst actions
+   */
+  export type postsFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the posts
+     */
+    select?: postsSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: postsInclude | null
+    /**
+     * Filter, which posts to fetch.
+     */
+    where?: postsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of posts to fetch.
+     */
+    orderBy?: Enumerable<postsOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for posts.
+     */
+    cursor?: postsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` posts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` posts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of posts.
+     */
+    distinct?: Enumerable<PostsScalarFieldEnum>
+  }
+
+  /**
+   * posts findFirst
+   */
+  export interface postsFindFirstArgs extends postsFindFirstArgsBase {
+   /**
+    * Throw an Error if query returns no results
+    * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+    */
+    rejectOnNotFound?: RejectOnNotFound
+  }
+      
+
+  /**
+   * posts findFirstOrThrow
+   */
+  export type postsFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the posts
+     */
+    select?: postsSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: postsInclude | null
+    /**
+     * Filter, which posts to fetch.
+     */
+    where?: postsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of posts to fetch.
+     */
+    orderBy?: Enumerable<postsOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for posts.
+     */
+    cursor?: postsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` posts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` posts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of posts.
+     */
+    distinct?: Enumerable<PostsScalarFieldEnum>
+  }
+
+
+  /**
+   * posts findMany
+   */
+  export type postsFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the posts
+     */
+    select?: postsSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: postsInclude | null
+    /**
+     * Filter, which posts to fetch.
+     */
+    where?: postsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of posts to fetch.
+     */
+    orderBy?: Enumerable<postsOrderByWithRelationInput>
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing posts.
+     */
+    cursor?: postsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` posts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` posts.
+     */
+    skip?: number
+    distinct?: Enumerable<PostsScalarFieldEnum>
+  }
+
+
+  /**
+   * posts create
+   */
+  export type postsCreateArgs = {
+    /**
+     * Select specific fields to fetch from the posts
+     */
+    select?: postsSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: postsInclude | null
+    /**
+     * The data needed to create a posts.
+     */
+    data: XOR<postsCreateInput, postsUncheckedCreateInput>
+  }
+
+
+  /**
+   * posts createMany
+   */
+  export type postsCreateManyArgs = {
+    /**
+     * The data used to create many posts.
+     */
+    data: Enumerable<postsCreateManyInput>
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * posts update
+   */
+  export type postsUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the posts
+     */
+    select?: postsSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: postsInclude | null
+    /**
+     * The data needed to update a posts.
+     */
+    data: XOR<postsUpdateInput, postsUncheckedUpdateInput>
+    /**
+     * Choose, which posts to update.
+     */
+    where: postsWhereUniqueInput
+  }
+
+
+  /**
+   * posts updateMany
+   */
+  export type postsUpdateManyArgs = {
+    /**
+     * The data used to update posts.
+     */
+    data: XOR<postsUpdateManyMutationInput, postsUncheckedUpdateManyInput>
+    /**
+     * Filter which posts to update
+     */
+    where?: postsWhereInput
+  }
+
+
+  /**
+   * posts upsert
+   */
+  export type postsUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the posts
+     */
+    select?: postsSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: postsInclude | null
+    /**
+     * The filter to search for the posts to update in case it exists.
+     */
+    where: postsWhereUniqueInput
+    /**
+     * In case the posts found by the `where` argument doesn't exist, create a new posts with this data.
+     */
+    create: XOR<postsCreateInput, postsUncheckedCreateInput>
+    /**
+     * In case the posts was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<postsUpdateInput, postsUncheckedUpdateInput>
+  }
+
+
+  /**
+   * posts delete
+   */
+  export type postsDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the posts
+     */
+    select?: postsSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: postsInclude | null
+    /**
+     * Filter which posts to delete.
+     */
+    where: postsWhereUniqueInput
+  }
+
+
+  /**
+   * posts deleteMany
+   */
+  export type postsDeleteManyArgs = {
+    /**
+     * Filter which posts to delete
+     */
+    where?: postsWhereInput
+  }
+
+
+  /**
+   * posts without action
+   */
+  export type postsArgs = {
+    /**
+     * Select specific fields to fetch from the posts
+     */
+    select?: postsSelect | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: postsInclude | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -5110,6 +6175,21 @@ export namespace Prisma {
   };
 
   export type AppsScalarFieldEnum = (typeof AppsScalarFieldEnum)[keyof typeof AppsScalarFieldEnum]
+
+
+  export const PostsScalarFieldEnum: {
+    id: 'id',
+    uuid: 'uuid',
+    user_id: 'user_id',
+    image: 'image',
+    desc: 'desc',
+    created_on: 'created_on',
+    modified_on: 'modified_on',
+    created_by: 'created_by',
+    modified_by: 'modified_by'
+  };
+
+  export type PostsScalarFieldEnum = (typeof PostsScalarFieldEnum)[keyof typeof PostsScalarFieldEnum]
 
 
   export const QueryMode: {
@@ -5206,6 +6286,7 @@ export namespace Prisma {
     modified_by?: IntNullableFilter | number | null
     user_app?: User_appListRelationFilter
     user_detail?: User_detailListRelationFilter
+    posts?: PostsListRelationFilter
   }
 
   export type userOrderByWithRelationInput = {
@@ -5220,6 +6301,7 @@ export namespace Prisma {
     modified_by?: SortOrder
     user_app?: user_appOrderByRelationAggregateInput
     user_detail?: user_detailOrderByRelationAggregateInput
+    posts?: postsOrderByRelationAggregateInput
   }
 
   export type userWhereUniqueInput = {
@@ -5468,6 +6550,72 @@ export namespace Prisma {
     modified_by?: IntNullableWithAggregatesFilter | number | null
   }
 
+  export type postsWhereInput = {
+    AND?: Enumerable<postsWhereInput>
+    OR?: Enumerable<postsWhereInput>
+    NOT?: Enumerable<postsWhereInput>
+    id?: IntFilter | number
+    uuid?: UuidFilter | string
+    user_id?: IntFilter | number
+    image?: StringNullableFilter | string | null
+    desc?: StringNullableFilter | string | null
+    created_on?: DateTimeNullableFilter | Date | string | null
+    modified_on?: DateTimeNullableFilter | Date | string | null
+    created_by?: IntNullableFilter | number | null
+    modified_by?: IntNullableFilter | number | null
+    user?: XOR<UserRelationFilter, userWhereInput>
+  }
+
+  export type postsOrderByWithRelationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_id?: SortOrder
+    image?: SortOrder
+    desc?: SortOrder
+    created_on?: SortOrder
+    modified_on?: SortOrder
+    created_by?: SortOrder
+    modified_by?: SortOrder
+    user?: userOrderByWithRelationInput
+  }
+
+  export type postsWhereUniqueInput = {
+    id?: number
+    uuid?: string
+  }
+
+  export type postsOrderByWithAggregationInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_id?: SortOrder
+    image?: SortOrder
+    desc?: SortOrder
+    created_on?: SortOrder
+    modified_on?: SortOrder
+    created_by?: SortOrder
+    modified_by?: SortOrder
+    _count?: postsCountOrderByAggregateInput
+    _avg?: postsAvgOrderByAggregateInput
+    _max?: postsMaxOrderByAggregateInput
+    _min?: postsMinOrderByAggregateInput
+    _sum?: postsSumOrderByAggregateInput
+  }
+
+  export type postsScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<postsScalarWhereWithAggregatesInput>
+    OR?: Enumerable<postsScalarWhereWithAggregatesInput>
+    NOT?: Enumerable<postsScalarWhereWithAggregatesInput>
+    id?: IntWithAggregatesFilter | number
+    uuid?: UuidWithAggregatesFilter | string
+    user_id?: IntWithAggregatesFilter | number
+    image?: StringNullableWithAggregatesFilter | string | null
+    desc?: StringNullableWithAggregatesFilter | string | null
+    created_on?: DateTimeNullableWithAggregatesFilter | Date | string | null
+    modified_on?: DateTimeNullableWithAggregatesFilter | Date | string | null
+    created_by?: IntNullableWithAggregatesFilter | number | null
+    modified_by?: IntNullableWithAggregatesFilter | number | null
+  }
+
   export type userCreateInput = {
     uuid: string
     username: string
@@ -5479,6 +6627,7 @@ export namespace Prisma {
     modified_by?: number | null
     user_app?: user_appCreateNestedManyWithoutUserInput
     user_detail?: user_detailCreateNestedManyWithoutUserInput
+    posts?: postsCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateInput = {
@@ -5493,6 +6642,7 @@ export namespace Prisma {
     modified_by?: number | null
     user_app?: user_appUncheckedCreateNestedManyWithoutUserInput
     user_detail?: user_detailUncheckedCreateNestedManyWithoutUserInput
+    posts?: postsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userUpdateInput = {
@@ -5506,6 +6656,7 @@ export namespace Prisma {
     modified_by?: NullableIntFieldUpdateOperationsInput | number | null
     user_app?: user_appUpdateManyWithoutUserNestedInput
     user_detail?: user_detailUpdateManyWithoutUserNestedInput
+    posts?: postsUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateInput = {
@@ -5520,6 +6671,7 @@ export namespace Prisma {
     modified_by?: NullableIntFieldUpdateOperationsInput | number | null
     user_app?: user_appUncheckedUpdateManyWithoutUserNestedInput
     user_detail?: user_detailUncheckedUpdateManyWithoutUserNestedInput
+    posts?: postsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateManyInput = {
@@ -5815,6 +6967,86 @@ export namespace Prisma {
     modified_by?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
+  export type postsCreateInput = {
+    uuid: string
+    image?: string | null
+    desc?: string | null
+    created_on?: Date | string | null
+    modified_on?: Date | string | null
+    created_by?: number | null
+    modified_by?: number | null
+    user: userCreateNestedOneWithoutPostsInput
+  }
+
+  export type postsUncheckedCreateInput = {
+    id?: number
+    uuid: string
+    user_id: number
+    image?: string | null
+    desc?: string | null
+    created_on?: Date | string | null
+    modified_on?: Date | string | null
+    created_by?: number | null
+    modified_by?: number | null
+  }
+
+  export type postsUpdateInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    created_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    modified_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_by?: NullableIntFieldUpdateOperationsInput | number | null
+    modified_by?: NullableIntFieldUpdateOperationsInput | number | null
+    user?: userUpdateOneRequiredWithoutPostsNestedInput
+  }
+
+  export type postsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_id?: IntFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    created_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    modified_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_by?: NullableIntFieldUpdateOperationsInput | number | null
+    modified_by?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type postsCreateManyInput = {
+    id?: number
+    uuid: string
+    user_id: number
+    image?: string | null
+    desc?: string | null
+    created_on?: Date | string | null
+    modified_on?: Date | string | null
+    created_by?: number | null
+    modified_by?: number | null
+  }
+
+  export type postsUpdateManyMutationInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    created_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    modified_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_by?: NullableIntFieldUpdateOperationsInput | number | null
+    modified_by?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type postsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    user_id?: IntFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    created_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    modified_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_by?: NullableIntFieldUpdateOperationsInput | number | null
+    modified_by?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
   export type IntFilter = {
     equals?: number
     in?: Enumerable<number> | number
@@ -5887,11 +7119,21 @@ export namespace Prisma {
     none?: user_detailWhereInput
   }
 
+  export type PostsListRelationFilter = {
+    every?: postsWhereInput
+    some?: postsWhereInput
+    none?: postsWhereInput
+  }
+
   export type user_appOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type user_detailOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type postsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6221,6 +7463,56 @@ export namespace Prisma {
     modified_by?: SortOrder
   }
 
+  export type postsCountOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_id?: SortOrder
+    image?: SortOrder
+    desc?: SortOrder
+    created_on?: SortOrder
+    modified_on?: SortOrder
+    created_by?: SortOrder
+    modified_by?: SortOrder
+  }
+
+  export type postsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    created_by?: SortOrder
+    modified_by?: SortOrder
+  }
+
+  export type postsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_id?: SortOrder
+    image?: SortOrder
+    desc?: SortOrder
+    created_on?: SortOrder
+    modified_on?: SortOrder
+    created_by?: SortOrder
+    modified_by?: SortOrder
+  }
+
+  export type postsMinOrderByAggregateInput = {
+    id?: SortOrder
+    uuid?: SortOrder
+    user_id?: SortOrder
+    image?: SortOrder
+    desc?: SortOrder
+    created_on?: SortOrder
+    modified_on?: SortOrder
+    created_by?: SortOrder
+    modified_by?: SortOrder
+  }
+
+  export type postsSumOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    created_by?: SortOrder
+    modified_by?: SortOrder
+  }
+
   export type user_appCreateNestedManyWithoutUserInput = {
     create?: XOR<Enumerable<user_appCreateWithoutUserInput>, Enumerable<user_appUncheckedCreateWithoutUserInput>>
     connectOrCreate?: Enumerable<user_appCreateOrConnectWithoutUserInput>
@@ -6235,6 +7527,13 @@ export namespace Prisma {
     connect?: Enumerable<user_detailWhereUniqueInput>
   }
 
+  export type postsCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<postsCreateWithoutUserInput>, Enumerable<postsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<postsCreateOrConnectWithoutUserInput>
+    createMany?: postsCreateManyUserInputEnvelope
+    connect?: Enumerable<postsWhereUniqueInput>
+  }
+
   export type user_appUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<Enumerable<user_appCreateWithoutUserInput>, Enumerable<user_appUncheckedCreateWithoutUserInput>>
     connectOrCreate?: Enumerable<user_appCreateOrConnectWithoutUserInput>
@@ -6247,6 +7546,13 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<user_detailCreateOrConnectWithoutUserInput>
     createMany?: user_detailCreateManyUserInputEnvelope
     connect?: Enumerable<user_detailWhereUniqueInput>
+  }
+
+  export type postsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<Enumerable<postsCreateWithoutUserInput>, Enumerable<postsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<postsCreateOrConnectWithoutUserInput>
+    createMany?: postsCreateManyUserInputEnvelope
+    connect?: Enumerable<postsWhereUniqueInput>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6293,6 +7599,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<user_detailScalarWhereInput>
   }
 
+  export type postsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<postsCreateWithoutUserInput>, Enumerable<postsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<postsCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<postsUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: postsCreateManyUserInputEnvelope
+    set?: Enumerable<postsWhereUniqueInput>
+    disconnect?: Enumerable<postsWhereUniqueInput>
+    delete?: Enumerable<postsWhereUniqueInput>
+    connect?: Enumerable<postsWhereUniqueInput>
+    update?: Enumerable<postsUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<postsUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<postsScalarWhereInput>
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -6327,6 +7647,20 @@ export namespace Prisma {
     update?: Enumerable<user_detailUpdateWithWhereUniqueWithoutUserInput>
     updateMany?: Enumerable<user_detailUpdateManyWithWhereWithoutUserInput>
     deleteMany?: Enumerable<user_detailScalarWhereInput>
+  }
+
+  export type postsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<Enumerable<postsCreateWithoutUserInput>, Enumerable<postsUncheckedCreateWithoutUserInput>>
+    connectOrCreate?: Enumerable<postsCreateOrConnectWithoutUserInput>
+    upsert?: Enumerable<postsUpsertWithWhereUniqueWithoutUserInput>
+    createMany?: postsCreateManyUserInputEnvelope
+    set?: Enumerable<postsWhereUniqueInput>
+    disconnect?: Enumerable<postsWhereUniqueInput>
+    delete?: Enumerable<postsWhereUniqueInput>
+    connect?: Enumerable<postsWhereUniqueInput>
+    update?: Enumerable<postsUpdateWithWhereUniqueWithoutUserInput>
+    updateMany?: Enumerable<postsUpdateManyWithWhereWithoutUserInput>
+    deleteMany?: Enumerable<postsScalarWhereInput>
   }
 
   export type userCreateNestedOneWithoutUser_detailInput = {
@@ -6415,6 +7749,20 @@ export namespace Prisma {
     update?: Enumerable<user_appUpdateWithWhereUniqueWithoutAppsInput>
     updateMany?: Enumerable<user_appUpdateManyWithWhereWithoutAppsInput>
     deleteMany?: Enumerable<user_appScalarWhereInput>
+  }
+
+  export type userCreateNestedOneWithoutPostsInput = {
+    create?: XOR<userCreateWithoutPostsInput, userUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: userCreateOrConnectWithoutPostsInput
+    connect?: userWhereUniqueInput
+  }
+
+  export type userUpdateOneRequiredWithoutPostsNestedInput = {
+    create?: XOR<userCreateWithoutPostsInput, userUncheckedCreateWithoutPostsInput>
+    connectOrCreate?: userCreateOrConnectWithoutPostsInput
+    upsert?: userUpsertWithoutPostsInput
+    connect?: userWhereUniqueInput
+    update?: XOR<userUpdateWithoutPostsInput, userUncheckedUpdateWithoutPostsInput>
   }
 
   export type NestedIntFilter = {
@@ -6673,6 +8021,37 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type postsCreateWithoutUserInput = {
+    uuid: string
+    image?: string | null
+    desc?: string | null
+    created_on?: Date | string | null
+    modified_on?: Date | string | null
+    created_by?: number | null
+    modified_by?: number | null
+  }
+
+  export type postsUncheckedCreateWithoutUserInput = {
+    id?: number
+    uuid: string
+    image?: string | null
+    desc?: string | null
+    created_on?: Date | string | null
+    modified_on?: Date | string | null
+    created_by?: number | null
+    modified_by?: number | null
+  }
+
+  export type postsCreateOrConnectWithoutUserInput = {
+    where: postsWhereUniqueInput
+    create: XOR<postsCreateWithoutUserInput, postsUncheckedCreateWithoutUserInput>
+  }
+
+  export type postsCreateManyUserInputEnvelope = {
+    data: Enumerable<postsCreateManyUserInput>
+    skipDuplicates?: boolean
+  }
+
   export type user_appUpsertWithWhereUniqueWithoutUserInput = {
     where: user_appWhereUniqueInput
     update: XOR<user_appUpdateWithoutUserInput, user_appUncheckedUpdateWithoutUserInput>
@@ -6738,6 +8117,37 @@ export namespace Prisma {
     modified_by?: IntNullableFilter | number | null
   }
 
+  export type postsUpsertWithWhereUniqueWithoutUserInput = {
+    where: postsWhereUniqueInput
+    update: XOR<postsUpdateWithoutUserInput, postsUncheckedUpdateWithoutUserInput>
+    create: XOR<postsCreateWithoutUserInput, postsUncheckedCreateWithoutUserInput>
+  }
+
+  export type postsUpdateWithWhereUniqueWithoutUserInput = {
+    where: postsWhereUniqueInput
+    data: XOR<postsUpdateWithoutUserInput, postsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type postsUpdateManyWithWhereWithoutUserInput = {
+    where: postsScalarWhereInput
+    data: XOR<postsUpdateManyMutationInput, postsUncheckedUpdateManyWithoutPostsInput>
+  }
+
+  export type postsScalarWhereInput = {
+    AND?: Enumerable<postsScalarWhereInput>
+    OR?: Enumerable<postsScalarWhereInput>
+    NOT?: Enumerable<postsScalarWhereInput>
+    id?: IntFilter | number
+    uuid?: UuidFilter | string
+    user_id?: IntFilter | number
+    image?: StringNullableFilter | string | null
+    desc?: StringNullableFilter | string | null
+    created_on?: DateTimeNullableFilter | Date | string | null
+    modified_on?: DateTimeNullableFilter | Date | string | null
+    created_by?: IntNullableFilter | number | null
+    modified_by?: IntNullableFilter | number | null
+  }
+
   export type userCreateWithoutUser_detailInput = {
     uuid: string
     username: string
@@ -6748,6 +8158,7 @@ export namespace Prisma {
     created_by?: number | null
     modified_by?: number | null
     user_app?: user_appCreateNestedManyWithoutUserInput
+    posts?: postsCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutUser_detailInput = {
@@ -6761,6 +8172,7 @@ export namespace Prisma {
     created_by?: number | null
     modified_by?: number | null
     user_app?: user_appUncheckedCreateNestedManyWithoutUserInput
+    posts?: postsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutUser_detailInput = {
@@ -6783,6 +8195,7 @@ export namespace Prisma {
     created_by?: NullableIntFieldUpdateOperationsInput | number | null
     modified_by?: NullableIntFieldUpdateOperationsInput | number | null
     user_app?: user_appUpdateManyWithoutUserNestedInput
+    posts?: postsUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutUser_detailInput = {
@@ -6796,6 +8209,7 @@ export namespace Prisma {
     created_by?: NullableIntFieldUpdateOperationsInput | number | null
     modified_by?: NullableIntFieldUpdateOperationsInput | number | null
     user_app?: user_appUncheckedUpdateManyWithoutUserNestedInput
+    posts?: postsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type userCreateWithoutUser_appInput = {
@@ -6808,6 +8222,7 @@ export namespace Prisma {
     created_by?: number | null
     modified_by?: number | null
     user_detail?: user_detailCreateNestedManyWithoutUserInput
+    posts?: postsCreateNestedManyWithoutUserInput
   }
 
   export type userUncheckedCreateWithoutUser_appInput = {
@@ -6821,6 +8236,7 @@ export namespace Prisma {
     created_by?: number | null
     modified_by?: number | null
     user_detail?: user_detailUncheckedCreateNestedManyWithoutUserInput
+    posts?: postsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type userCreateOrConnectWithoutUser_appInput = {
@@ -6869,6 +8285,7 @@ export namespace Prisma {
     created_by?: NullableIntFieldUpdateOperationsInput | number | null
     modified_by?: NullableIntFieldUpdateOperationsInput | number | null
     user_detail?: user_detailUpdateManyWithoutUserNestedInput
+    posts?: postsUpdateManyWithoutUserNestedInput
   }
 
   export type userUncheckedUpdateWithoutUser_appInput = {
@@ -6882,6 +8299,7 @@ export namespace Prisma {
     created_by?: NullableIntFieldUpdateOperationsInput | number | null
     modified_by?: NullableIntFieldUpdateOperationsInput | number | null
     user_detail?: user_detailUncheckedUpdateManyWithoutUserNestedInput
+    posts?: postsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type appsUpsertWithoutUser_appInput = {
@@ -6957,6 +8375,70 @@ export namespace Prisma {
     data: XOR<user_appUpdateManyMutationInput, user_appUncheckedUpdateManyWithoutUser_appInput>
   }
 
+  export type userCreateWithoutPostsInput = {
+    uuid: string
+    username: string
+    name: string
+    password: string
+    created_on?: Date | string | null
+    modified_on?: Date | string | null
+    created_by?: number | null
+    modified_by?: number | null
+    user_app?: user_appCreateNestedManyWithoutUserInput
+    user_detail?: user_detailCreateNestedManyWithoutUserInput
+  }
+
+  export type userUncheckedCreateWithoutPostsInput = {
+    id?: number
+    uuid: string
+    username: string
+    name: string
+    password: string
+    created_on?: Date | string | null
+    modified_on?: Date | string | null
+    created_by?: number | null
+    modified_by?: number | null
+    user_app?: user_appUncheckedCreateNestedManyWithoutUserInput
+    user_detail?: user_detailUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type userCreateOrConnectWithoutPostsInput = {
+    where: userWhereUniqueInput
+    create: XOR<userCreateWithoutPostsInput, userUncheckedCreateWithoutPostsInput>
+  }
+
+  export type userUpsertWithoutPostsInput = {
+    update: XOR<userUpdateWithoutPostsInput, userUncheckedUpdateWithoutPostsInput>
+    create: XOR<userCreateWithoutPostsInput, userUncheckedCreateWithoutPostsInput>
+  }
+
+  export type userUpdateWithoutPostsInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    created_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    modified_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_by?: NullableIntFieldUpdateOperationsInput | number | null
+    modified_by?: NullableIntFieldUpdateOperationsInput | number | null
+    user_app?: user_appUpdateManyWithoutUserNestedInput
+    user_detail?: user_detailUpdateManyWithoutUserNestedInput
+  }
+
+  export type userUncheckedUpdateWithoutPostsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    created_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    modified_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_by?: NullableIntFieldUpdateOperationsInput | number | null
+    modified_by?: NullableIntFieldUpdateOperationsInput | number | null
+    user_app?: user_appUncheckedUpdateManyWithoutUserNestedInput
+    user_detail?: user_detailUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type user_appCreateManyUserInput = {
     id?: number
     uuid: string
@@ -6976,6 +8458,17 @@ export namespace Prisma {
     birth_date?: Date | string | null
     cover_pict?: string | null
     profile_pict?: string | null
+    created_on?: Date | string | null
+    modified_on?: Date | string | null
+    created_by?: number | null
+    modified_by?: number | null
+  }
+
+  export type postsCreateManyUserInput = {
+    id?: number
+    uuid: string
+    image?: string | null
+    desc?: string | null
     created_on?: Date | string | null
     modified_on?: Date | string | null
     created_by?: number | null
@@ -7049,6 +8542,38 @@ export namespace Prisma {
     birth_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cover_pict?: NullableStringFieldUpdateOperationsInput | string | null
     profile_pict?: NullableStringFieldUpdateOperationsInput | string | null
+    created_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    modified_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_by?: NullableIntFieldUpdateOperationsInput | number | null
+    modified_by?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type postsUpdateWithoutUserInput = {
+    uuid?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    created_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    modified_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_by?: NullableIntFieldUpdateOperationsInput | number | null
+    modified_by?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type postsUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    created_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    modified_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_by?: NullableIntFieldUpdateOperationsInput | number | null
+    modified_by?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type postsUncheckedUpdateManyWithoutPostsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    uuid?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
     created_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     modified_on?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_by?: NullableIntFieldUpdateOperationsInput | number | null

@@ -23,6 +23,7 @@ model user {
   modified_by Int?
   user_app    user_app[]
   user_detail user_detail[]
+  posts       posts[]
 }
 
 model user_detail {
@@ -65,4 +66,17 @@ model apps {
   created_by  Int?
   modified_by Int?
   user_app    user_app[]
+}
+
+model posts {
+  id          Int       @id @default(autoincrement())
+  uuid        String    @unique @db.Uuid
+  user_id     Int
+  image       String?   @db.VarChar(250)
+  desc        String?   @db.VarChar(250)
+  created_on  DateTime? @default(now())
+  modified_on DateTime? @default(now())
+  created_by  Int?
+  modified_by Int?
+  user        user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
