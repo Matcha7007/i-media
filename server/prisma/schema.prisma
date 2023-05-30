@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./@generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id          Int           @id @default(autoincrement())
+  uuid        String        @unique @db.Uuid
+  username    String        @unique @db.VarChar(50)
+  name        String        @db.VarChar(150)
+  password    String        @db.VarChar(250)
+  created_on  DateTime?     @default(now())
+  modified_on DateTime?     @default(now())
+  created_by  Int?
+  modified_by Int?
+  user_app    user_app[]
+  user_detail user_detail[]
+}
+
+model user_detail {
+  id           Int       @id @default(autoincrement())
+  uuid         String    @unique @db.Uuid
+  user_id      Int
+  city         String?   @db.VarChar(50)
+  bio          String?
+  birth_date   DateTime? @db.Timestamptz()
+  cover_pict   String?   @db.VarChar(250)
+  profile_pict String?   @db.VarChar(250)
+  created_on   DateTime? @default(now())
+  modified_on  DateTime? @default(now())
+  created_by   Int?
+  modified_by  Int?
+  user         user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model user_app {
+  id          Int       @id @default(autoincrement())
+  uuid        String    @unique @db.Uuid
+  user_id     Int
+  apps_id     Int
+  desc        String    @db.VarChar(150)
+  created_on  DateTime? @default(now())
+  modified_on DateTime? @default(now())
+  created_by  Int?
+  modified_by Int?
+  user        user      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  apps        apps      @relation(fields: [apps_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model apps {
+  id          Int        @id @default(autoincrement())
+  uuid        String     @unique @db.Uuid
+  name        String     @db.VarChar(150)
+  desc        String?    @db.VarChar(250)
+  created_on  DateTime?  @default(now())
+  modified_on DateTime?  @default(now())
+  created_by  Int?
+  modified_by Int?
+  user_app    user_app[]
+}
